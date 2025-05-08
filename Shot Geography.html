@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cedarville University Shot Geography</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 2px solid #0d3b66;
+            padding-bottom: 20px;
+        }
+        .logo {
+            max-width: 400px;
+            margin: 0 auto 20px;
+            display: block;
+        }
+        h1 {
+            color: #0d3b66;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        h2 {
+            color: #0d3b66;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+            margin-top: 30px;
+        }
+        h3 {
+            color: #0d3b66;
+        }
+        .section {
+            background-color: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        .tabs {
+            display: flex;
+            margin-bottom: 20px;
+        }
+        .tab {
+            padding: 10px 20px;
+            background-color: #e6e6e6;
+            cursor: pointer;
+            border-radius: 5px 5px 0 0;
+            margin-right: 5px;
+        }
+        .tab.active {
+            background-color: #0d3b66;
+            color: white;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #0d3b66;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        pre {
+            background-color: #f5f5f5;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: Consolas, Monaco, 'Andale Mono', monospace;
+            line-height: 1.4;
+            border-left: 4px solid #0d3b66;
+        }
+        code {
+            color: #0d3b66;
+        }
+        .code-annotation {
+            background-color: #fafffa;
+            border-left: 3px solid #4caf50;
+            padding: 10px;
+            margin: 15px 0;
+            font-style: italic;
+        }
+        .positive {
+            color: #4caf50;
+            font-weight: bold;
+        }
+        .negative {
+            color: #f44336;
+            font-weight: bold;
+        }
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="https://www.cedarville.edu/~/media/Images/Athletics/Logos/CU-Athletics-Logo-2C.ashx" alt="Cedarville Yellow Jackets" class="logo">
+        <h1>Basketball Shot Distribution Analysis</h1>
+            </header>
+
+    <main>
+        <div class="section">
+            <h2>Project Overview</h2>
+            <p>The analysis presents multiple scenarios with different shot distribution strategies while maintaining the same total number of shots and shooting percentages from each zone. The results demonstrate how reducing mid-range shots in favor of more efficient shooting zones could increase team scoring without increasing the # of possessions per game .</p>
+        </div>
+
+        <div class="section">
+            <h2>Shot Distribution Analysis</h2>
+            
+            <div class="tabs">
+                <div class="tab active" onclick="showTab('baseline')">Baseline</div>
+                <div class="tab" onclick="showTab('scenario20')">20% Scenario</div>
+                <div class="tab" onclick="showTab('scenario15')">15% Scenario</div>
+                <div class="tab" onclick="showTab('scenario10')">10% Scenario</div>
+            </div>
+            
+            <div id="baseline" class="tab-content active">
+                <h3>2023-2024 Baseline Shot Distribution</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Shot Type</th>
+                            <th>FGA</th>
+                            <th>FGA Rate</th>
+                            <th>FGM</th>
+                            <th>FG%</th>
+                            <th>PPS</th>
+                            <th>PPG</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>At the Rim 2's</td>
+                            <td>445</td>
+                            <td>24.4%</td>
+                            <td>299</td>
+                            <td>67.2%</td>
+                            <td>1.34</td>
+                            <td>23.57</td>
+                        </tr>
+                        <tr>
+                            <td>Non At the Rim 2's</td>
+                            <td>460</td>
+                            <td>25.2%</td>
+                            <td>194</td>
+                            <td>42.2%</td>
+                            <td>0.84</td>
+                            <td>15.29</td>
+                        </tr>
+                        <tr>
+                            <td>Above break 3's</td>
+                            <td>745</td>
+                            <td>40.8%</td>
+                            <td>267</td>
+                            <td>35.8%</td>
+                            <td>1.08</td>
+                            <td>31.57</td>
+                        </tr>
+                        <tr>
+                            <td>Corner 3's</td>
+                            <td>177</td>
+                            <td>9.7%</td>
+                            <td>65</td>
+                            <td>36.7%</td>
+                            <td>1.10</td>
+                            <td>7.68</td>
+                        </tr>
+                        <tr>
+                            <td>Total Shots</td>
+                            <td>1827</td>
+                            <td>100%</td>
+                            <td>825</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>87.11</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div id="scenario20" class="tab-content">
+                <h3>20% Mid-Range Shot Distribution</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Shot Type</th>
+                            <th>FGA</th>
+                            <th>FGA Rate</th>
+                            <th>FGM</th>
+                            <th>FG%</th>
+                            <th>PPS</th>
+                            <th>PPG</th>
+                            <th>Diff</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>At the Rim 2's</td>
+                            <td>476</td>
+                            <td>26.1%</td>
+                            <td>320</td>
+                            <td>67.2%</td>
+                            <td>1.34</td>
+                            <td>25.22</td>
+                            <td class="positive">+1.66</td>
+                        </tr>
+                        <tr>
+                            <td>Non At the Rim 2's</td>
+                            <td>365</td>
+                            <td>20.0%</td>
+                            <td>154</td>
+                            <td>42.2%</td>
+                            <td>0.84</td>
+                            <td>12.14</td>
+                            <td class="negative">-3.15</td>
+                        </tr>
+                        <tr>
+                            <td>Above break 3's</td>
+                            <td>797</td>
+                            <td>43.6%</td>
+                            <td>286</td>
+                            <td>35.8%</td>
+                            <td>1.08</td>
+                            <td>33.81</td>
+                            <td class="positive">+2.25</td>
+                        </tr>
+                        <tr>
+                            <td>Corner 3's</td>
+                            <td>189</td>
+                            <td>10.3%</td>
+                            <td>69</td>
+                            <td>36.7%</td>
+                            <td>1.10</td>
+                            <td>8.16</td>
+                            <td class="positive">+0.47</td>
+                        </tr>
+                        <tr>
+                            <td>Total Shots</td>
+                            <td>1827</td>
+                            <td>100%</td>
+                            <td>829</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>88.33</td>
+                            <td class="positive">+1.22</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div id="scenario15" class="tab-content">
+                <h3>15% Mid-Range Shot Distribution</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Shot Type</th>
+                            <th>FGA</th>
+                            <th>FGA Rate</th>
+                            <th>FGM</th>
+                            <th>FG%</th>
+                            <th>PPS</th>
+                            <th>PPG</th>
+                            <th>Diff</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>At the Rim 2's</td>
+                            <td>506</td>
+                            <td>27.7%</td>
+                            <td>340</td>
+                            <td>67.2%</td>
+                            <td>1.34</td>
+                            <td>26.80</td>
+                            <td class="positive">+3.23</td>
+                        </tr>
+                        <tr>
+                            <td>Non At the Rim 2's</td>
+                            <td>274</td>
+                            <td>15.0%</td>
+                            <td>116</td>
+                            <td>42.2%</td>
+                            <td>0.85</td>
+                            <td>9.14</td>
+                            <td class="negative">-6.15</td>
+                        </tr>
+                        <tr>
+                            <td>Above break 3's</td>
+                            <td>846</td>
+                            <td>46.3%</td>
+                            <td>303</td>
+                            <td>35.8%</td>
+                            <td>1.07</td>
+                            <td>35.82</td>
+                            <td class="positive">+4.26</td>
+                        </tr>
+                        <tr>
+                            <td>Corner 3's</td>
+                            <td>201</td>
+                            <td>11.0%</td>
+                            <td>74</td>
+                            <td>36.7%</td>
+                            <td>1.10</td>
+                            <td>8.75</td>
+                            <td class="positive">+1.06</td>
+                        </tr>
+                        <tr>
+                            <td>Total Shots</td>
+                            <td>1827</td>
+                            <td>100%</td>
+                            <td>833</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>89.51</td>
+                            <td class="positive">+2.40</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div id="scenario10" class="tab-content">
+                <h3>10% Mid-Range Shot Distribution</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Shot Type</th>
+                            <th>FGA</th>
+                            <th>FGA Rate</th>
+                            <th>FGM</th>
+                            <th>FG%</th>
+                            <th>PPS</th>
+                            <th>PPG</th>
+                            <th>Diff</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>At the Rim 2's</td>
+                            <td>535</td>
+                            <td>29.3%</td>
+                            <td>359</td>
+                            <td>67.2%</td>
+                            <td>1.34</td>
+                            <td>28.30</td>
+                            <td class="positive">+4.73</td>
+                        </tr>
+                        <tr>
+                            <td>Non At the Rim 2's</td>
+                            <td>183</td>
+                            <td>10.0%</td>
+                            <td>77</td>
+                            <td>42.2%</td>
+                            <td>0.84</td>
+                            <td>6.07</td>
+                            <td class="negative">-9.22</td>
+                        </tr>
+                        <tr>
+                            <td>Above break 3's</td>
+                            <td>896</td>
+                            <td>49.0%</td>
+                            <td>321</td>
+                            <td>35.8%</td>
+                            <td>1.07</td>
+                            <td>37.95</td>
+                            <td class="positive">+6.38</td>
+                        </tr>
+                        <tr>
+                            <td>Corner 3's</td>
+                            <td>213</td>
+                            <td>11.7%</td>
+                            <td>78</td>
+                            <td>36.7%</td>
+                            <td>1.10</td>
+                            <td>9.22</td>
+                            <td class="positive">+1.54</td>
+                        </tr>
+                        <tr>
+                            <td>Total Shots</td>
+                            <td>1827</td>
+                            <td>100%</td>
+                            <td>835</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>90.54</td>
+                            <td class="positive">+3.43</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>VBA Code Analysis</h2>
+            <h3>Shot Distribution Simulation</h3>
+            <p>This simple VBA module assisted me in calculating various realistic scenarios while maintaining shooting percentages to analyze potential scoring improvements.</p>
+            
+            <pre><code>Sub WhatIfShotDistribution()
+    ' Variables for tracking shot data
+    Dim targetws As Worksheet
+    Dim wsName As String
+    Dim ws As Worksheet
+    
+    Dim ctRimShots As Long
+    Dim ctPaintShots As Long
+    Dim ctMidRangeShots As Long
+    Dim ctBreak3Shots As Long
+    Dim ctcorner3Shots As Long
+    
+    Dim ctCombinedShots As Long
+    Dim TotalShots As Long
+    
+    Dim ctRimMakes As Long
+    Dim ctPaintMakes As Long
+    Dim ctMidRangeMakes As Long
+    Dim ctBreak3Makes As Long
+    Dim ctcorner3Makes As Long
+    
+    Dim ctTotalshotsMade
+    
+    Dim targetcombinedPCT
+    Dim targetCombinedShots As Long
+    
+    Dim targetRimShots As Long
+    Dim targetPaintShots As Long
+    Dim targetMidRangeShots As Long
+    Dim targetBreak3Shots As Long
+    Dim targetcorner3Shots As Long
+    
+    Dim targetTotal As Double
+    
+    Dim targetRimMakes As Long
+    Dim targetPaintMakes As Long
+    Dim targetMidRangeMakes As Long
+    Dim targetBreak3Makes As Long
+    Dim targetcorner3Makes As Long
+    Dim totalRemainingShots As Long
+    Dim removedShots As Long
+    
+    ' Get current shot distribution from the actual data worksheet
+    Set ws = ThisWorkbook.Sheets("Actual")
+    
+    ctRimShots = ws.Range("B2").Value
+    ctPaintShots = ws.Range("B3").Value
+    ctMidRangeShots = ws.Range("B4").Value
+    ctBreak3Shots = ws.Range("B6").Value
+    ctcorner3Shots = ws.Range("B7").Value
+    ctCombinedShots = ctPaintShots + ctMidRangeShots
+    TotalShots = ws.Range("B10").Value
+     
+    ctRimMakes = ws.Range("D2").Value
+    ctPaintMakes = ws.Range("D3").Value
+    ctMidRangeMakes = ws.Range("D4").Value
+    ctBreak3Makes = ws.Range("D6").Value
+    ctcorner3Makes = ws.Range("D7").Value
+    
+    ' Get user input for target mid-range shot percentage
+    On Error Resume Next
+    targetcombinedPCT = CDbl(InputBox("Enter the new combined % of shots for midrange and paint (e.g., 0.2 for 20%)"))
+    If Err.Number <> 0 Or targetcombinedPCT < 0 Or targetcombinedPCT > 1 Then
+        MsgBox "Please enter a valid percentage (between 0 and 1).", vbExclamation
+        Exit Sub
+    End If
+    On Error GoTo 0
+    
+    ' Set target worksheet for adjusted data
+    Set targetws = ThisWorkbook.Sheets("Adjusted")
+  
+    ' Calculate new shot distribution
+    targetCombinedShots = Application.WorksheetFunction.Round(TotalShots * targetcombinedPCT, 0)
+    
+    removedShots = ctCombinedShots - targetCombinedShots
+    
+    targetPaintShots = Application.WorksheetFunction.Round(ctPaintShots * (targetCombinedShots / ctCombinedShots), 0)
+    targetMidRangeShots = targetCombinedShots - targetPaintShots
+    
+    ' Redistribute the removed shots proportionally to other shot types
+    totalRemainingShots = ctRimShots + ctcorner3Shots + ctBreak3Shots
+    targetRimShots = ctRimShots + Application.WorksheetFunction.Round(removedShots * (ctRimShots / totalRemainingShots), 0)
+    targetBreak3Shots = ctBreak3Shots + Application.WorksheetFunction.Round(removedShots * (ctBreak3Shots / totalRemainingShots), 0)
+    targetcorner3Shots = ctcorner3Shots + Application.WorksheetFunction.Round(removedShots * (ctcorner3Shots / totalRemainingShots), 0)
+    
+    ' Update target worksheet with new values
+    With targetws
+        .Range("B2").Value = targetRimShots
+        .Range("B3").Value = targetPaintShots
+        .Range("B4").Value = targetMidRangeShots
+        .Range("B6").Value = targetBreak3Shots
+        .Range("B7").Value = targetcorner3Shots
+        
+        .Range("C2").Formula = .Range("B2") / TotalShots
+        
+        .Range("B10").Value = TotalShots
+        .Range("A10").Value = "Total Shots"
+        .Range("A1:A8").Font.Bold = True
+        .Columns("A:I").AutoFit
+    End With
+End Sub</code></pre>
+
+            <div class="code-annotation">
+                <p>Key features of this VBA module:</p>
+                <ul>
+                    <li>Takes user input for desired mid-range shot percentage</li>
+                    <li>Maintains total shot volume while redistributing shots</li>
+                    <li>Proportionally redistributes shots to maintain shooting style</li>
+                    <li>Automatically calculates new point totals based on shooting percentages</li>
+                </ul>
+            </div>
+        </div>
+
+
+    <script>
+        // Tab switching functionality
+        function showTab(tabId) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Remove active class from all tabs
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show the selected tab content
+            document.getElementById(tabId).classList.add('active');
+            
+            // Add active class to the clicked tab
+            event.currentTarget.classList.add('active');
+        }
+    </script>
+</body>
+</html>
